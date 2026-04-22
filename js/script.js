@@ -94,14 +94,30 @@ const data = [
   }
 ];
 
-// Récupère la liste #list
-const ulList = document.getElementById("list");
+/**
+ * Affiche les jeux dans la page
+ * @param {Array} tabJeux - Tableau d'objets jeu à afficher
+ */
+function afficherJeux(tabJeux) {
+  // Récupère la liste #list
+  const ulList = document.getElementById("list");
+  // Vide, réinitialise la liste
+  ulList.innerHTML = "";
 
 // Parcours la liste et créer un li par jeu
-data.forEach(jeu => {
-  ulList.innerHTML += `
-    <li>
-        <div>${jeu.name}</div>
-        <div><img src="${jeu.image}" alt="${jeu.name}" ></div>
-    </li>`;
-});
+  tabJeux.forEach(jeu => {
+    ulList.innerHTML += `
+    <article class="card">
+      <img src="${jeu.image}" alt="${jeu.name}">
+      <div class="card-body">
+        <h2>${jeu.name}</h2>
+        <p>${jeu.category} — ${jeu.year}</p>
+        <span class="rating">${jeu.rating}</span>
+      </div>
+    </article>
+  `;
+  });
+}
+
+// Appel au chargement de la page
+afficherJeux(data);
