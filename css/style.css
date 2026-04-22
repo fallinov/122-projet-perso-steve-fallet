@@ -58,7 +58,15 @@ body {
   width: 100%;
   /* height: 200px; : fixe une hauteur de 200px pour toutes les images (uniformité) */
   height: 200px;
-  /* object-fit: cover; : remplit l'espace en gardant les proportions, coupe si nécessaire (au lieu de déformer) */
+  /* object-fit: cover; : remplit l'espace en gardant les proportions, coupe si nécessaire (au lieu de déformer)
+
+     AUTRES VALEURS POSSIBLES :
+     - contain    : affiche l'image ENTIÈRE dedans, peut avoir des espaces vides (barres noires)
+     - fill       : remplit tout l'espace MAIS peut déformer l'image (étirement)
+     - scale-down : montre la version la plus petite (contient OU taille naturelle)
+     - none       : affiche l'image à sa taille d'origine (peut sortir de la zone)
+     - cover      : ACTUEL - remplit l'espace, coupe les bords (recommandé pour galeries)
+  */
   object-fit: cover;
 }
 
