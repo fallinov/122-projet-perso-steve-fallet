@@ -101,13 +101,13 @@ const data = [
 function afficherJeux(tabJeux) {
   // Récupère la liste #list
   const ulList = document.getElementById("list");
-  // Vide, réinitialise la liste
-  ulList.innerHTML = "";
+  // Variable temporaire pour construire la liste
+  let html = "";
 
-// Parcours la liste et créer un li par jeu
+// Parcours le tableau et créer un li par jeu
   tabJeux.forEach(jeu => {
-    ulList.innerHTML += `
-    <article class="card">
+    html += `
+    <article class="card" data-id="${jeu.id}">
       <img src="${jeu.image}" alt="${jeu.name}">
       <div class="card-body">
         <h2>${jeu.name}</h2>
@@ -117,6 +117,9 @@ function afficherJeux(tabJeux) {
     </article>
   `;
   });
+
+  // Ajoute la liste complète dans le DOM
+  ulList.innerHTML = html;
 }
 
 // Appel au chargement de la page
