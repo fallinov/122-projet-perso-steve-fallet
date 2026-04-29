@@ -94,6 +94,28 @@ const data = [
   }
 ];
 
+// Bouton de tri
+let btnSort = document.getElementById("btn-sort");
+// Sens du tri
+let sortAsc = false; // Tri DESC par défaut
+
+// console.log(btnSort);
+btnSort.addEventListener("click", function (event) {
+
+  // Tri UNE COPIE du tableau par notes DESC
+  let sortedTab = [...data].sort(function (a, b) {
+    return sortAsc ? a.rating - b.rating : b.rating - a.rating;
+  });
+  // Inverse le tri
+  sortAsc = !sortAsc;
+
+  // Modifier le texte du bouton
+  btnSort.textContent = sortAsc ? "Trier par note ↑ (ASC)" : "Trier par note ↓ (DESC)";
+  // Affiche le tableau avec le nouveau tri
+  afficherJeux(sortedTab);
+});
+
+
 /**
  * Affiche les jeux dans la page
  * @param {Array} tabJeux - Tableau d'objets jeu à afficher
