@@ -1,7 +1,7 @@
 "use strict";
 
 // Tableau de données — à générer avec Copilot / une IA
-const data = [
+let data = [
   {
     id: 35,
     name: "The Witcher 3",
@@ -94,39 +94,51 @@ const data = [
   }
 ];
 
-// Bouton de tri
-let btnSort = document.getElementById("btn-sort");
-// Sens du tri
-let sortAsc = false; // Tri DESC par défaut
+// Éléments du DOM
+const btnSort = document.getElementById("btn-sort");
+const searchInput = document.getElementById("search");
 
-// console.log(btnSort);
-btnSort.addEventListener("click", function (event) {
+// Sens du tri : false = DESC (notes élevées en premier)
+let sortAsc = false;
 
-  // Tri UNE COPIE du tableau par notes DESC
-  let sortedTab = [...data].sort(function (a, b) {
-    return sortAsc ? a.rating - b.rating : b.rating - a.rating;
-  });
-  // Inverse le tri
+/**
+ * Rafraîchit l'affichage en combinant filtre + tri
+ */
+function refresh() {
+  const query = searchInput.value.toLowerCase();
+
+  // 1. Filtrer selon le champ de recherche
+  let result = data.filter(jeu =>
+    jeu.name.toLowerCase().includes(query)
+  );
+
+  // 2. Trier selon l'état du bouton
+  result = [...result].sort((a, b) =>
+    sortAsc ? a.rating - b.rating : b.rating - a.rating
+  );
+
+  // 3. Afficher
+  afficherJeux(result);
+}
+
+// Tri : inverser l'état, mettre à jour le bouton, rafraîchir
+btnSort.addEventListener("click", function () {
   sortAsc = !sortAsc;
-
-  // Modifier le texte du bouton
   btnSort.textContent = sortAsc ? "Trier par note ↑ (ASC)" : "Trier par note ↓ (DESC)";
-  // Affiche le tableau avec le nouveau tri
-  afficherJeux(sortedTab);
+  refresh();
 });
 
+// Recherche : à chaque frappe, rafraîchir
+searchInput.addEventListener("input", refresh);
 
 /**
  * Affiche les jeux dans la page
  * @param {Array} tabJeux - Tableau d'objets jeu à afficher
  */
 function afficherJeux(tabJeux) {
-  // Récupère la liste #list
   const ulList = document.getElementById("list");
-  // Variable temporaire pour construire la liste
   let html = "";
 
-// Parcours le tableau et créer un li par jeu
   tabJeux.forEach(jeu => {
     html += `
     <article class="card" data-id="${jeu.id}">
@@ -140,9 +152,8 @@ function afficherJeux(tabJeux) {
   `;
   });
 
-  // Ajoute la liste complète dans le DOM
   ulList.innerHTML = html;
 }
 
-// Appel au chargement de la page
-afficherJeux(data);
+// Affichage initial
+refresh();

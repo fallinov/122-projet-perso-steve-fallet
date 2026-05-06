@@ -18,6 +18,28 @@ body {
   padding: 2rem;
 }
 
+/* Barre d'outils : champ de recherche + bouton tri côte à côte */
+.toolbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+#search {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  flex: 1;
+  max-width: 400px;
+}
+
+#search:focus {
+  outline: none;
+  border-color: #4a90d9;
+}
+
 /* Style de la liste #list (l'id doit correspondre à l'élément HTML avec id="list") */
 #list {
   /* display: grid; : crée une grille CSS (affichage en colonnes) */
