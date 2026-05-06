@@ -1,14 +1,18 @@
 "use strict";
+// "use strict" : active le mode strict de JavaScript
+// — interdit les variables non déclarées, signale plus d'erreurs → bon réflexe à prendre
 
-// Tableau de données — à générer avec Copilot / une IA
+// ─── Données ────────────────────────────────────────────────────────────────
+// Tableau d'objets représentant la collection de jeux-vidéos
+// Chaque objet a les mêmes propriétés : id, name, category, platform, rating, year, image
 const data = [
   {
-    id: 35,
+    id: 35,          // Identifiant unique du jeu (nombre entier)
     name: "The Witcher 3",
     category: "RPG",
     platform: "PC",
-    rating: 9.5,
-    year: 2015,
+    rating: 9.5,     // Note sur 10 (nombre décimal autorisé)
+    year: 2015,      // Année de sortie
     image: "https://placehold.co/400x300/4a90d9/white?text=The+Witcher+3"
   },
   {
@@ -94,30 +98,38 @@ const data = [
   }
 ];
 
+// ─── Affichage ───────────────────────────────────────────────────────────────
+
 /**
  * Affiche les jeux dans la page
  * @param {Array} tabJeux - Tableau d'objets jeu à afficher
  */
 function afficherJeux(tabJeux) {
-  // Récupère la liste #list
+  // Récupère l'élément <ul id="list"> dans le HTML
   const ulList = document.getElementById("list");
-  // Vide, réinitialise la liste
+
+  // Vide la liste avant de la reconstruire
+  // (sinon les anciens éléments restent à chaque appel)
   ulList.innerHTML = "";
 
-// Parcours la liste et créer un li par jeu
+  // Parcourt chaque jeu du tableau et construit une carte HTML
   tabJeux.forEach(jeu => {
+    // Pour chaque jeu, on ajoute une carte au contenu existant de la liste
+    // ⚠️ innerHTML += reconstruit tout le DOM à chaque itération
+    //    → avec 10 jeux : 10 reconstructions complètes du DOM
+    //    → à optimiser à la séance 11
     ulList.innerHTML += `
-    <article class="card">
-      <img src="${jeu.image}" alt="${jeu.name}">
-      <div class="card-body">
-        <h2>${jeu.name}</h2>
-        <p>${jeu.category} — ${jeu.year}</p>
-        <span class="rating">${jeu.rating}</span>
-      </div>
-    </article>
-  `;
+      <article class="card">
+        <img src="${jeu.image}" alt="${jeu.name}">
+        <div class="card-body">
+          <h2>${jeu.name}</h2>
+          <p>${jeu.category} — ${jeu.year}</p>
+          <span class="rating">${jeu.rating}</span>
+        </div>
+      </article>
+    `;
   });
 }
 
-// Appel au chargement de la page
+// Affichage initial au chargement de la page
 afficherJeux(data);
