@@ -97,6 +97,10 @@ let data = [
 // Éléments du DOM
 const btnSort = document.getElementById("btn-sort");
 const searchInput = document.getElementById("search");
+const form = document.getElementById("form-add");
+const inputName = document.getElementById("input-name");
+const inputCategory = document.getElementById("input-category");
+const inputRating = document.getElementById("input-rating");
 
 // Sens du tri : false = DESC (notes élevées en premier)
 let sortAsc = false;
@@ -131,6 +135,39 @@ btnSort.addEventListener("click", function () {
 // Recherche : à chaque frappe, rafraîchir
 searchInput.addEventListener("input", refresh);
 
+// Formulaire : ajouter un jeu
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const nouveauJeu = {
+    id: Date.now(),
+    name: inputName.value.trim(),
+    category: inputCategory.value,
+    rating: Number(inputRating.value),
+    year: new Date().getFullYear(),
+    platform: "PC",
+    image: "https://placehold.co/400x300/7f8c8d/white?text=" + encodeURIComponent(inputName.value.trim())
+  };
+
+  data.push(nouveauJeu);
+  refresh();
+  form.reset();
+});
+
+// Suppression : délégation sur le conteneur #list
+document.getElementById("list").addEventListener("click", function (event) {
+  const btn = event.target.closest(".btn-delete");
+  if (!btn) return;
+
+  const card = btn.closest(".card");
+  const id = Number(card.dataset.id);
+
+  if (!confirm("Supprimer ce jeu ?")) return;
+
+  data = data.filter(jeu => jeu.id !== id);
+  refresh();
+});
+
 /**
  * Affiche les jeux dans la page
  * @param {Array} tabJeux - Tableau d'objets jeu à afficher
@@ -147,6 +184,7 @@ function afficherJeux(tabJeux) {
         <h2>${jeu.name}</h2>
         <p>${jeu.category} — ${jeu.year}</p>
         <span class="rating">${jeu.rating}</span>
+        <button class="btn-delete">Supprimer</button>
       </div>
     </article>
   `;
