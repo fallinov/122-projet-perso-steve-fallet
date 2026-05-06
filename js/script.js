@@ -97,6 +97,10 @@ let data = [
 // Éléments du DOM
 const btnSort = document.getElementById("btn-sort");
 const searchInput = document.getElementById("search");
+const form = document.getElementById("form-add");
+const inputName = document.getElementById("input-name");
+
+
 
 // Sens du tri : false = DESC (notes élevées en premier)
 let sortAsc = false;
@@ -154,6 +158,22 @@ function afficherJeux(tabJeux) {
 
   ulList.innerHTML = html;
 }
+
+// Intercepter envoi du formulaire
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const newItem = {
+    id: Date.now(),                    // ID unique basé sur l'horodatage
+    name: inputName.value.trim(),      // trim() supprime les espaces en début/fin
+    category: "RPG",
+    rating: Number("8"), // .value est toujours une string → convertir
+    image: "img/default.jpg"
+  };
+
+  data.push(newItem);   // Ajouter le nouvel objet au tableau de données§
+  refresh();
+});
 
 // Affichage initial
 refresh();

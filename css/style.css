@@ -97,27 +97,42 @@ body {
   padding: 1rem;
 }
 
-/* Formulaires */
 form {
-  margin: 2em 0;
-  max-width: 360px;
+  margin: 1rem 0;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-bottom: 12px;
 }
 
-input, select, button {
+/* Cibler uniquement les champs du formulaire, pas tous les inputs de la page */
+.form-group input,
+.form-group select {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 1rem;
 }
 
-input:focus, select:focus {
+.form-group input:focus,
+.form-group select:focus {
   outline: none;
   border-color: #0078d4;
+}
+
+form button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #0078d4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+  background-color: #005fa3;
 }
