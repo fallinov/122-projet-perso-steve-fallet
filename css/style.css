@@ -96,3 +96,26 @@ body {
   /* padding: 1rem; : ajoute 16px d'espacement interne pour le texte à l'intérieur de la carte */
   padding: 1rem;
 }
+
+/* Formulaires */
+form {
+  margin: 2em 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+input, select, button {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #0078d4;
+}

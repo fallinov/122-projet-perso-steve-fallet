@@ -12,6 +12,31 @@
   </header>
 
   <main>
+    <form id="form-add">
+      <h2>Ajouter</h2>
+
+      <div class="form-group">
+        <label for="input-name">Nom</label>
+        <input type="text" id="input-name" placeholder="Ex : The Witcher 3" required>
+      </div>
+
+      <div class="form-group">
+        <label for="input-category">Catégorie</label>
+        <select id="input-category">
+          <option value="RPG">RPG</option>
+          <option value="Action">Action</option>
+          <option value="Stratégie">Stratégie</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="input-rating">Note (1–10)</label>
+        <input type="number" id="input-rating" min="1" max="10" placeholder="8">
+      </div>
+
+      <button type="submit">Ajouter</button>
+    </form>
+
     <div class="toolbar">
       <input type="text" id="search" placeholder="Rechercher un jeu...">
       <button id="btn-sort">Trier par note ↓ (DESC)</button>
