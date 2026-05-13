@@ -139,14 +139,39 @@ searchInput.addEventListener("input", refresh);
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
+  // On lit et on nettoie les valeurs avant validation.
+  // .trim() supprime les espaces avant/après — important pour ne pas accepter "   " comme nom.
+  const name = inputName.value.trim();
+  const rating = Number(inputRating.value);
+
+  // Validation du nom : required côté HTML empêche un champ totalement vide,
+  // mais pas un nom composé uniquement d'espaces. On vérifie côté JS pour être sûr.
+  if (!name) {
+    alert("Le nom est requis.");
+    // .focus() replace le curseur dans le champ problématique
+    // → l'utilisateur sait exactement où corriger.
+    inputName.focus();
+    return;
+  }
+
+  // Validation de la note : type="number" + min/max ne bloquent pas tout
+  // (un champ vide passe en NaN, une valeur hors plage peut quand même être soumise).
+  // On vérifie : note présente (truthy) ET entre 1 et 10.
+  if (!rating || rating < 1 || rating > 10) {
+    alert("La note doit être entre 1 et 10.");
+    inputRating.focus();
+    return;
+  }
+
+  // Si on arrive ici, toutes les vérifications sont passées → on peut construire le jeu.
   const nouveauJeu = {
     id: Date.now(),
-    name: inputName.value.trim(),
+    name: name,
     category: inputCategory.value,
-    rating: Number(inputRating.value),
+    rating: rating,
     year: new Date().getFullYear(),
     platform: "PC",
-    image: "https://placehold.co/400x300/7f8c8d/white?text=" + encodeURIComponent(inputName.value.trim())
+    image: "https://placehold.co/400x300/7f8c8d/white?text=" + encodeURIComponent(name)
   };
 
   data.push(nouveauJeu);
