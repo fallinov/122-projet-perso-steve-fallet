@@ -40,6 +40,41 @@ body {
   border-color: #4a90d9;
 }
 
+/* ===== Boutons — pattern DRY (Don't Repeat Yourself) =====
+   Tous les boutons partagent les mêmes propriétés de base (taille, forme, comportement).
+   On les centralise dans .btn — chaque variante (.btn-primary, .btn-danger) n'ajoute
+   que la couleur. Évite la répétition des 8 propriétés communes sur chaque bouton. */
+.btn {
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
+}
+
+/* Bouton primaire — actions positives (Ajouter, Trier...) */
+.btn-primary {
+  background-color: #4a90d9;
+}
+.btn-primary:hover {
+  background-color: #357ab8;
+}
+.btn-primary:active {
+  background-color: #2c6294;
+}
+
+/* Bouton danger — actions destructives (Supprimer...) */
+.btn-danger {
+  background-color: #c0392b;
+}
+.btn-danger:hover {
+  background-color: #a02b1f;
+}
+
 /* Style de la liste #list (l'id doit correspondre à l'élément HTML avec id="list") */
 #list {
   /* display: grid; : crée une grille CSS (affichage en colonnes) */
@@ -121,36 +156,15 @@ form {
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #0078d4;
+  border-color: #4a90d9;
 }
 
-/* Bouton soumettre */
-form button[type="submit"] {
-  padding: 10px 20px;
-  background-color: #0078d4;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-}
+/* Le bouton "Ajouter" utilise désormais .btn.btn-primary dans le HTML
+   (cf. section Boutons plus haut) — plus de styles spécifiques nécessaires ici. */
 
-form button[type="submit"]:hover {
-  background-color: #005fa3;
-}
-
-/* Bouton supprimer sur chaque carte */
+/* Bouton supprimer dans une carte — uniquement le positionnement.
+   Le style visuel (couleur, padding, etc.) vient de .btn.btn-danger appliqué dans le HTML.
+   Cette classe sert aussi d'identifiant sémantique pour la délégation JS (.closest). */
 .btn-delete {
   margin-top: 8px;
-  padding: 6px 12px;
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.85rem;
-}
-
-.btn-delete:hover {
-  background-color: #c0392b;
 }

@@ -184,7 +184,7 @@ function afficherJeux(tabJeux) {
         <h2>${jeu.name}</h2>
         <p>${jeu.category} — ${jeu.year}</p>
         <span class="rating">${jeu.rating}</span>
-        <button class="btn-delete">Supprimer</button>
+        <button class="btn btn-danger btn-delete">Supprimer</button>
       </div>
     </article>
   `;
