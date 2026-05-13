@@ -162,3 +162,28 @@ form button[type="submit"]:hover {
 .btn-delete:hover {
   background-color: #c0392b;
 }
+
+/* ===== Responsive — mobile =====
+   @media (max-width: 600px) : ces règles ne s'appliquent QUE quand la
+   largeur de la fenêtre est inférieure ou égale à 600px (téléphones).
+   En dessous de cette largeur, on surcharge les règles définies plus haut. */
+@media (max-width: 600px) {
+
+  /* Sur mobile, on empile la toolbar verticalement (au lieu de côte à côte)
+     pour éviter que le champ de recherche et le bouton ne soient écrasés. */
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* On supprime la limite de 400px : le champ de recherche prend toute la
+     largeur disponible (plus confortable au doigt). */
+  #search {
+    max-width: 100%;
+  }
+
+  /* On réduit le padding du body pour gagner un peu d'espace sur petits écrans. */
+  body {
+    padding: 1rem;
+  }
+}
