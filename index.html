@@ -12,7 +12,10 @@
   </header>
 
   <main>
-    <form id="form-add">
+    <!-- novalidate désactive la validation HTML5 native (les bulles "Veuillez remplir ce champ").
+         On garde les attributs required/min/max pour la sémantique et le fallback,
+         mais c'est notre code JS qui prend le contrôle complet de la validation. -->
+    <form id="form-add" novalidate>
       <h2>Ajouter</h2>
 
       <div class="form-group">
@@ -40,10 +43,15 @@
     </form>
 
     <div class="toolbar">
+      <!-- Label visuellement masqué mais lu par les lecteurs d'écran (accessibilité).
+           Le placeholder seul ne suffit pas comme label : il disparaît à la saisie. -->
+      <label for="search" class="sr-only">Rechercher un jeu</label>
       <input type="text" id="search" placeholder="Rechercher un jeu...">
       <button id="btn-sort">Trier par note ↓ (DESC)</button>
     </div>
-    <ul id="list"></ul>
+    <!-- div (et non ul) : un ul ne doit contenir que des li. Ici on a des article
+         (cartes) ou un p (message "Aucun résultat") en grille CSS. -->
+    <div id="list"></div>
   </main>
 
   <script src="js/script.js"></script>
