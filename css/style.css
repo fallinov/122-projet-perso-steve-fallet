@@ -40,6 +40,41 @@ body {
   border-color: #4a90d9;
 }
 
+/* ===== Boutons — pattern DRY (Don't Repeat Yourself) =====
+   Tous les boutons partagent les mêmes propriétés de base (taille, forme, comportement).
+   On les centralise dans .btn — chaque variante (.btn-primary, .btn-danger) n'ajoute
+   que la couleur. Évite la répétition des 8 propriétés communes sur chaque bouton. */
+.btn {
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
+}
+
+/* Bouton primaire — actions positives (Ajouter, Trier...) */
+.btn-primary {
+  background-color: #4a90d9;
+}
+.btn-primary:hover {
+  background-color: #357ab8;
+}
+.btn-primary:active {
+  background-color: #2c6294;
+}
+
+/* Bouton danger — actions destructives (Supprimer...) */
+.btn-danger {
+  background-color: #c0392b;
+}
+.btn-danger:hover {
+  background-color: #a02b1f;
+}
+
 /* Style de la grille #list (élément HTML avec id="list" — un <div>, pas un <ul>,
    car ce sont des <article> et un <p> qui peuvent y être placés, pas des <li>). */
 #list {
@@ -77,6 +112,11 @@ body {
   overflow: hidden;
   /* transition: transform 0.2s; : ajoute une animation fluide lors des changements (utile pour le hover) */
   transition: transform 0.2s;
+  /* Carte en flex column pour que .card-body puisse s'étirer et occuper
+     tout l'espace vertical restant (utile pour aligner les boutons en bas
+     quel que soit le nombre de lignes du titre). */
+  display: flex;
+  flex-direction: column;
 }
 
 /* Effet au survol (.card:hover = quand on passe la souris sur une carte) */
@@ -107,11 +147,23 @@ body {
 .card-body {
   /* padding: 1rem; : ajoute 16px d'espacement interne pour le texte à l'intérieur de la carte */
   padding: 1rem;
+  /* Flex column pour pouvoir aligner le bouton "Supprimer" en bas à droite. */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  /* flex: 1 → .card-body prend tout l'espace vertical restant dans la carte
+     (entre l'image et le bas). Combiné avec margin-top: auto sur le bouton,
+     ça aligne tous les boutons en bas même si les titres ont des longueurs différentes. */
+  flex: 1;
 }
 
-/* Formulaires */
+/* Formulaires.
+   max-width limite la largeur sur grands écrans (lisibilité — au-delà de 500px,
+   un formulaire devient inconfortable à scanner du regard).
+   margin-bottom 3em pour bien séparer le formulaire de la toolbar en dessous. */
 form {
-  margin: 2em 0;
+  max-width: 500px;
+  margin: 2em 0 3em;
 }
 
 .form-group {
@@ -121,7 +173,7 @@ form {
   margin-bottom: 12px;
 }
 
-/* Champs et bouton du formulaire uniquement */
+/* Champs du formulaire */
 .form-group input,
 .form-group select {
   padding: 8px;
@@ -133,23 +185,11 @@ form {
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #0078d4;
+  border-color: #4a90d9;
 }
 
-/* Bouton soumettre */
-form button[type="submit"] {
-  padding: 10px 20px;
-  background-color: #0078d4;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-form button[type="submit"]:hover {
-  background-color: #005fa3;
-}
+/* Le bouton "Ajouter" utilise désormais .btn.btn-primary dans le HTML
+   (cf. section Boutons plus haut) — plus de styles spécifiques nécessaires ici. */
 
 /* Message affiché quand la recherche ne retourne aucun jeu.
    Texte discret en italique gris — c'est une information secondaire, pas une erreur. */
@@ -159,23 +199,17 @@ form button[type="submit"]:hover {
   padding: 1rem 0;
 }
 
-/* Bouton supprimer sur chaque carte.
-   Couleur foncée #c0392b (au lieu de #e74c3c) pour un contraste suffisant
-   avec le texte blanc — ratio 5.8:1, conforme WCAG AA. */
+/* Bouton supprimer dans une carte — uniquement le positionnement.
+   Le style visuel (couleur, padding, etc.) vient de .btn.btn-danger appliqué dans le HTML.
+   Cette classe sert aussi d'identifiant sémantique pour la délégation JS (.closest). */
 .btn-delete {
-  margin-top: 8px;
-  padding: 6px 12px;
-  background-color: #c0392b;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.85rem;
-}
-
-.btn-delete:hover {
-  /* Au survol, on fonce encore d'un cran pour donner du feedback visuel. */
-  background-color: #a02b1f;
+  /* margin-top: auto pousse le bouton tout en bas du conteneur flex parent
+     (.card-body). Astuce classique en flexbox : "auto" sur la marge opposée
+     consomme tout l'espace libre disponible. */
+  margin-top: auto;
+  /* align-self: flex-end aligne ce bouton sur la fin (droite) du conteneur flex
+     parent (.card-body). Plus propre que float ou margin-left: auto. */
+  align-self: flex-end;
 }
 
 /* ===== Responsive — mobile =====
