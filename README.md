@@ -1,84 +1,49 @@
-# Mon projet 122
+# Les Jeux-Vidéos
 
-Projet JavaScript — Cours 122 (ESIG)
-
-## Description
-
-[Décris ton projet ici : quel type de données tu gères et pourquoi tu as choisi cette ressource]
-
-## Lien GitHub Pages
-
-[Colle ici le lien de ton site en ligne]
-
-## Fonctionnalités
-
-- [ ] Affichage dynamique de la liste
-- [ ] Tri par plusieurs critères
-- [ ] Recherche en temps réel
-- [ ] Ajout via formulaire
-- [ ] Suppression d'éléments
-- [ ] Responsive (mobile + desktop)
-
-## Captures d'écran
-
-[Ajoute des captures de ton projet ici]
-
-## Transparence IA
-
-### Outils utilisés
-[Quels outils d'IA as-tu utilisés ? (Copilot, ChatGPT, Claude, etc.)]
-
-### Prompts utilisés
-[Copie ici les prompts importants que tu as donnés à l'IA]
-
-### Ce que j'ai appris vs ce que l'IA a généré
-[Explique ce que tu as écrit toi-même et ce que l'IA a produit. Qu'as-tu appris en utilisant l'IA ?]
-
----
-
-<details>
-<summary>📋 Exemple — Projet "Jeux Vidéo"</summary>
-
-> Cet exemple montre à quoi pourrait ressembler un README complété.
-> **Supprime cet encart** quand tu remplis ton propre README.
+Catalogue interactif de jeux vidéo en HTML/CSS/JavaScript natif — projet du cours C122 (ESIG).
 
 ## Description
 
-Application web pour gérer ma collection de jeux vidéo. J'ai choisi cette
-ressource car je suis passionné de gaming et je voulais un catalogue personnel
-pour trier mes jeux par note et plateforme.
+Application web pour gérer une collection de jeux vidéo. L'utilisateur peut consulter la liste, rechercher par nom, trier par note, ajouter un nouveau jeu via un formulaire et supprimer un jeu avec confirmation. Tous les composants sont en JavaScript natif (sans framework).
+
+J'ai choisi cette thématique parce que c'est un domaine qui me passionne et qui se prête bien à un affichage en cartes avec note, catégorie et année.
 
 ## Lien GitHub Pages
 
-https://mon-pseudo.github.io/esig-122-jeux-video/
+https://fallinov.github.io/122-projet-perso-steve-fallet/
 
 ## Fonctionnalités
 
-- [x] Affichage dynamique de la liste (cartes avec image, nom, catégorie, note)
-- [x] Tri par nom, note et année
+- [x] Affichage dynamique de la liste (cartes avec image, nom, catégorie, année, note)
+- [x] Tri par note (ASC / DESC inversable)
 - [x] Recherche en temps réel par nom
-- [x] Ajout d'un jeu via formulaire
-- [x] Suppression avec confirmation
-- [x] Responsive (mobile + desktop)
+- [x] Ajout d'un jeu via formulaire avec validation (nom requis, note entre 1 et 10)
+- [x] Suppression d'un jeu avec confirmation
+- [x] Message "Aucun résultat" quand la recherche ne retourne rien
+- [x] Responsive (mobile + desktop) avec media query à 600px
+
+## Technologies
+
+- HTML5
+- CSS3 (Grid + Flexbox + media queries)
+- JavaScript ES6+ (sans framework)
 
 ## Captures d'écran
 
-![Aperçu desktop](img/screenshot-desktop.png)
-![Aperçu mobile](img/screenshot-mobile.png)
+![Aperçu desktop](https://placehold.co/800x500/4a90d9/white?text=Capture+desktop)
+![Aperçu mobile](https://placehold.co/375x600/4a90d9/white?text=Capture+mobile)
 
 ## Transparence IA
 
 ### Outils utilisés
-- GitHub Copilot (dans WebStorm) pour la génération des données et l'autocomplétion
-- ChatGPT pour comprendre `Array.sort()` avec `localeCompare()`
+- GitHub Copilot (WebStorm) pour l'autocomplétion et la génération du tableau initial
+- ChatGPT pour comprendre les guard clauses et les media queries
 
 ### Prompts utilisés
-- "Génère un tableau de 10 jeux vidéo avec id, name, category, platform, rating, year, image"
-- "Explique-moi comment trier un tableau d'objets par une propriété texte en JavaScript"
+- « Génère un tableau de 10 jeux vidéo avec id, name, category, platform, rating, year, image »
+- « Comment afficher un message quand le résultat d'un filter est vide en JavaScript ? »
 
 ### Ce que j'ai appris vs ce que l'IA a généré
 - **Généré par l'IA** : le tableau de données initial (10 objets)
-- **Écrit par moi** : toute la logique d'affichage, tri, recherche, ajout et suppression
-- **Appris grâce à l'IA** : j'ai compris comment `localeCompare()` gère les accents en français
-
-</details>
+- **Écrit par moi** : la fonction `refresh()`, le tri inversable, la validation du formulaire, la suppression par délégation
+- **Appris grâce à l'IA** : le pattern guard clause (`if (... ) return;` en début de fonction) et la syntaxe `@media (max-width: ...)` pour le responsive
