@@ -174,6 +174,16 @@ document.getElementById("list").addEventListener("click", function (event) {
  */
 function afficherJeux(tabJeux) {
   const ulList = document.getElementById("list");
+
+  // Guard clause : si aucun jeu à afficher (recherche sans résultat ou liste vide),
+  // on affiche un message et on arrête la fonction avec return.
+  // Sans ce garde-fou, la page resterait vide et l'utilisateur ne saurait pas si
+  // c'est un bug ou s'il n'y a vraiment aucun résultat.
+  if (tabJeux.length === 0) {
+    ulList.innerHTML = '<p class="no-result">Aucun résultat pour cette recherche.</p>';
+    return;
+  }
+
   let html = "";
 
   tabJeux.forEach(jeu => {

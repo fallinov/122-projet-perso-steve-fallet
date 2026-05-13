@@ -139,6 +139,14 @@ form button[type="submit"]:hover {
   background-color: #005fa3;
 }
 
+/* Message affiché quand la recherche ne retourne aucun jeu.
+   Texte discret en italique gris — c'est une information secondaire, pas une erreur. */
+.no-result {
+  color: #666;
+  font-style: italic;
+  padding: 1rem 0;
+}
+
 /* Bouton supprimer sur chaque carte */
 .btn-delete {
   margin-top: 8px;
